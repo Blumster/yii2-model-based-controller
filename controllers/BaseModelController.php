@@ -61,8 +61,7 @@ abstract class BaseModelController extends Controller
      */
     public function beforeAction($action)
     {
-        $parent = parent::beforeAction($action);
-        if (!$parent) {
+        if (!parent::beforeAction($action)) {
             return false;
         }
 
@@ -105,7 +104,7 @@ abstract class BaseModelController extends Controller
 
         ModelUrl::setUp($this->paramName, $this->modelId);
 
-        return $parent;
+        return true;
     }
 
     /**
