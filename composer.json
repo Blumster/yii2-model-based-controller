@@ -1,0 +1,27 @@
+{
+    "name": "blumster/yii2-model-based-controller",
+    "description": "Base model controller, which automatically loads an ActiveRecord before every call.",
+    "type": "yii2-extension",
+    "keywords": [ "yii2", "extension", "controller" ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Blumster",
+            "email": "blumster.yii2@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "~2.0"
+    },
+    "support": {
+        "issues": "https://github.com/Blumster/yii2-model-based-controller/issues?state=open",
+        "source": "https://github.com/Blumster/yii2-model-based-controller"
+    },
+    "autoload": {
+        "psr-4": {
+            "blumster\\controllers\\": "controllers/",
+			"blumster\\helpers\\": "helpers/"
+        }
+    }
+}
