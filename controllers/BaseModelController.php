@@ -79,12 +79,21 @@ abstract class BaseModelController extends Controller
 
         $requiredWiths = static::requiredWiths();
 
-        if (isset($requiredWiths[$action->id])) {
-            foreach ($requiredWiths[$action->id] as $joinWith => $type) {
-                if ($type === self::RELATION_JOIN_WITH) {
-                    $query->joinWith($joinWith);
-                } elseif ($type === self::RELATION_WITH) {
-                    $query->with($joinWith);
+        foreach ([ '*', $action->id ] as $actionId) {
+            if (!isset($requiredWiths[$actionId])) {
+                continue;
+            }
+
+            foreach ($requiredWiths[$actionId] as $with => $type) {
+                if (is_int($with)) {
+                    $with = $type;
+                    $type = self::RELATION_WITH;
+                }
+
+                if ($type === self::RELATION_WITH) {
+                    $query->with($with);
+                } elseif ($type === self::RELATION_JOIN_WITH) {
+                    $query->joinWith($with);
                 }
             }
         }
@@ -145,6 +154,8 @@ abstract class BaseModelController extends Controller
     protected function handleError($error)
     {
         Yii::trace('BaseModelController - handleError: ' . $error);
+        
+        $this->goHome();
 
         return false;
     }
